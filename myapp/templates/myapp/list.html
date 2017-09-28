@@ -1,0 +1,76 @@
+{% extends 'myapp/base.html' %}
+
+
+{% block body %}
+     {% if msg_message  %}
+     <div class="alert alert-success tg-alertmessage fade in">
+     <i class="fa fa-bug"></i><span>
+     <p><strong>{{ msg_message }}</strong></p></span>
+     </div>
+     {% endif %}
+    <div class="panel panel-default">
+  		<div class="panel-heading">
+   		 <h3 class="panel-title">Contact List</h3>
+ 	 	</div>
+  		<div class="panel-body">
+
+  <form  method="post" autocomplete="off" id='myform';">
+    {% csrf_token %}
+    <table class="table table-striped">
+  		<thead>
+  			<tr>
+  				<th>No</th>
+          <th>Name</th>
+  				<th>Email</th>
+  				<th></th>
+  			</tr>
+  		</thead>
+      
+  		<tbody>
+        <!-- Contact list loads here -->
+  		{% if name_list %}
+      
+  		{% for name in name_list %}
+  		<tr>
+        <td>{{ forloop.counter }}</td>
+  			<td>{{ name.name_text }}</td>
+  			<td>{{ name.email_text }} </td>
+  		  <td><button type="submit" onclick="submitform('edit')"  class="btn btn-default" id='edit' name="name_id" value="{{ name.id }}">Edit</button>
+  			<button type="submit" onclick="submitform('delete')"  class="btn btn-danger" id="delete" name="name_id" value="{{ name.id }}">Delete</button></td>
+ 
+  		</tr>
+  		{% endfor %}
+
+  		{% else %}
+  		<tr>
+  			<td>No records are available</td>
+  		</tr>
+   
+        {% endif %}
+
+  		</tbody>
+     </table>
+
+  </form>
+
+   		 
+        </div>
+    </div>
+    <script>
+
+    function submitform(btn) {
+    if (btn =='edit'){
+    document.getElementById("myform").action = "{% url 'myapp:add' %}";
+    document.getElementById("myform").submit();
+
+    } else if (btn =='delete')  {
+    document.getElementById("myform").action = "{% url 'myapp:delete' %}";
+    document.getElementById("myform").submit();
+    }
+
+    }
+
+    </script>
+{% endblock %}
+
+

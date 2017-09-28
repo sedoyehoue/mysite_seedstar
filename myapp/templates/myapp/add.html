@@ -1,0 +1,33 @@
+{% extends 'myapp/base.html' %}
+
+
+{% block body %}
+
+
+{% if msg_message %}<div class="alert alert-danger tg-alertmessage fade in">
+	<i class="fa fa-bug"></i>
+	<span><p><strong>{{ msg_message }}</strong></p></span>
+</div>{% endif %}
+  <div class="panel panel-default">
+  		<div class="panel-heading">
+   		 <h3 class="panel-title">Add Contact</h3>
+ 	 	</div>
+  		<div class="panel-body">
+
+  		<form action="{% url 'myapp:save' %}" method="post" autocomplete="off">
+  		<!-- CSRF token protection -->
+        {% csrf_token %}
+        <div class="form-group col-md-12">
+        <!-- form fields load here  -->
+        {{ form }}
+        <input type="hidden" name="name_id" value="{{ name_id }}">
+        <input type="submit" value="Save" class="btn-success" />
+        </div>
+        
+        </form>
+
+   		 
+ 	 	</div>
+  		 
+</div>
+{% endblock %}
