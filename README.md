@@ -31,4 +31,8 @@ checked and validated as aright email format (username@yahoo.fr).
  
 * The application is protected against malicious users to execute hijacking attack as all forms are using the CSRF token to transmit POST data. All SQL queries are escaped by using django's queryset to prevent SQL injection attack.
 The application files are built using django's template inheritance ({{ var }}), thus preventing XSS attack.
+
+
+admin : username=sedoyehoue
+       password=sedoyehoue
  
